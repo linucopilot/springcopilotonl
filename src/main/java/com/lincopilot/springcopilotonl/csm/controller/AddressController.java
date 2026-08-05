@@ -1,24 +1,26 @@
 package com.lincopilot.springcopilotonl.csm.controller;
 
-import com.lincopilot.springcopilotonl.common.constants.Constants;
-import com.lincopilot.springcopilotonl.common.dto.ResultPayload;
+import com.lincopilot.springcopilotonl.common.exception.ApiResponse;
 import com.lincopilot.springcopilotonl.csm.service.AddressService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api/csm")
 public class AddressController {
-    AddressService addressService;
 
-     public ResultPayload login(HttpServletRequest request, @RequestBody Map<String, Object> inData) {
+    @Autowired
+    private AddressService addressService;
 
-        // log.info("AddressController.login() inData : {}", inData);
-        ResultPayload result = new ResultPayload();
-        result.setResultCd(Constants.SUCCESS_CD);
-        result.setResultData(addressService.selectAddress(request, inData));
-        return result;
+    @PostMapping("/address")
+    public ApiResponse<Map<String, Object>> getAddress(HttpServletRequest request, @RequestBody Map<String, Object> inData) {
+        Map<String, Object> resultData = addressService.selectAddress(request, inData);
+        return ApiResponse.success(resultData);
     }
 }
