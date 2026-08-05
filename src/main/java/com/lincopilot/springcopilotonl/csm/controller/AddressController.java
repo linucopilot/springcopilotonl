@@ -1,7 +1,6 @@
 package com.lincopilot.springcopilotonl.csm.controller;
 
-import com.lincopilot.springcopilotonl.common.constants.Constants;
-import com.lincopilot.springcopilotonl.common.dto.ResultPayload;
+import com.lincopilot.springcopilotonl.common.exception.ApiResponse;
 import com.lincopilot.springcopilotonl.csm.service.AddressService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +19,8 @@ public class AddressController {
     private AddressService addressService;
 
     @PostMapping("/address")
-    public ResultPayload getAddress(HttpServletRequest request, @RequestBody Map<String, Object> inData) {
-
-        // log.info("AddressController.getAddress() inData : {}", inData);
-        ResultPayload result = new ResultPayload();
-        result.setResultCd(Constants.SUCCESS_CD);
-        result.setResultData(addressService.selectAddress(request, inData));
-        return result;
+    public ApiResponse<Map<String, Object>> getAddress(HttpServletRequest request, @RequestBody Map<String, Object> inData) {
+        Map<String, Object> resultData = addressService.selectAddress(request, inData);
+        return ApiResponse.success(resultData);
     }
 }

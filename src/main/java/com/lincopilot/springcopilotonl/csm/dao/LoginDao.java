@@ -17,4 +17,11 @@ public interface LoginDao {
     public int updateUser(Map<String, Object> inData);
 
     public int deleteUser(Map<String, Object> inData);
+
+    // Refresh Token Management Methods
+    public int saveRefreshToken(Map<String, Object> inData);
+
+    public Map<String, Object> selectRefreshToken(Map<String, Object> inData);
+
+    public int deleteRefreshToken(Map<String, Object> inData);
 }
