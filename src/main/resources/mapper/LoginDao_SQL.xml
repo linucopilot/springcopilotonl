@@ -3,6 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lincopilot.springcopilotonl.csm.dao.LoginDao">
     <select id="selectUser" parameterType="Map" resultType="Map">
-
+        SELECT /* com.lincopilot.springcopilotonl.csm.dao.LoginDao.selectUser */
+            t.OPER_GROUP_CD			AS "operGroupCd"
+            ,t.UNO					AS "uno"
+            ,t.USER_NAME			AS "userName"
+            ,t.PWD					AS "pwd"
+            ,t.BRN_CODE				AS "brnCode"
+            ,t.REG_CODE				AS "reginalCode"
+            ,t.USE_YN               AS "useYn"
+        FROM LNE_MGR.TSCSM0002 t
+        WHERE 1=1
+          AND UPPER(t.UNO) = UPPER(#{uno})
     </select>
 </mapper>

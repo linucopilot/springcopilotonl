@@ -2,10 +2,21 @@ spring:
   application:
     name: springcopilotonl
   datasource:
-    url: jdbc:postgresql://localhost:5432/lincopilot_db
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:oracle:thin:@//localhost:1521/LNED
+    username: LNE_APP
+    password: apppass$2026
+    driver-class-name: oracle.jdbc.OracleDriver
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
+
+# app:
+#   # Browser clients authenticate with a JSESSIONID session cookie.
+
+# server:
+#   servlet:
+#     session:
+#       cookie:
+#         http-only: true
+#         same-site: lax
+#         secure: ${SESSION_COOKIE_SECURE:false}

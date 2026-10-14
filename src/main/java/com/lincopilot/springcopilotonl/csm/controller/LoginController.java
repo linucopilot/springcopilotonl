@@ -2,6 +2,7 @@ package com.lincopilot.springcopilotonl.csm.controller;
 
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,14 +15,20 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 public class LoginController {
 
-    LoginService loginService;
+	private final LoginService loginService;
 
-    public ResultPayload login(HttpServletRequest request, @RequestBody Map<String, Object> inData) {
+	public LoginController(LoginService loginService) {
+		this.loginService = loginService;
+	}
 
-        // log.info("LoginController.login() inData : {}", inData);
-        ResultPayload result = new ResultPayload();
-        result.setResultCd(Constants.SUCCESS_CD);
-        result.setResultData(loginService.actionLogin(request, inData));
-        return result;
-    }
+	@PostMapping("/auth/actionLogin")
+	public ResultPayload login(HttpServletRequest request, @RequestBody Map<String, Object> inData) {
+
+		// log.info("LoginController.login() inData : {}", inData);
+		ResultPayload result = new ResultPayload();
+		result.setResultCd(Constants.SUCCESS_CD);
+		result.setResultData(loginService.actionLogin(request, inData));
+		return result;
+	}
+	
 }
