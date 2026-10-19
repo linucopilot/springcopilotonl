@@ -1,22 +1,28 @@
+server:
+    tomcat:
+        additional-tld-skip-patterns: "*.jar"
 spring:
-  application:
-    name: springcopilotonl
-  datasource:
-    url: jdbc:oracle:thin:@//localhost:1521/LNED
-    username: LNE_APP
-    password: apppass$2026
-    driver-class-name: oracle.jdbc.OracleDriver
+    application:
+        name: springcopilotonl
+    # datasource:
+    #   url: jdbc:oracle:thin:@//localhost:1521/LNED
+    #   username: LNE_APP
+    #   password: apppass$2026
+    #   driver-class-name: oracle.jdbc.OracleDriver
+
+    encrypt:
+        key: KBPrasac@2026
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 50MB
+            max-request-size: 105MB
+
+    dbserver:
+        jdbc:
+            schema: LNE_MGR
+        jndi:
+            loan: jdbc/dsLOAN_LNE_APP
 
 mybatis:
-  mapper-locations: classpath:mapper/**/*.xml
-
-# app:
-#   # Browser clients authenticate with a JSESSIONID session cookie.
-
-# server:
-#   servlet:
-#     session:
-#       cookie:
-#         http-only: true
-#         same-site: lax
-#         secure: ${SESSION_COOKIE_SECURE:false}
+    mapper-locations: classpath:mapper/**/*.xml

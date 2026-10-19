@@ -16,11 +16,19 @@ public class StringUtil {
         return str1.equals(str2);
     }
 
+    public static boolean isNotBlank(final CharSequence sc){
+        return !isNotBlank(sc);
+    }
+
     public static boolean urlMatchesWithRegEx(String url, String pattern) {
         if (pattern.indexOf("/**") > -1){
             pattern = pattern.replace("/**", "/(.|\\s)*\\S(.|\\s)*");
         }
         java.util.regex.Matcher matcher = java.util.regex.Pattern.compile(pattern).matcher(url);
         return matcher.find();
+    }
+
+    public static String evl(Object value, String defaultValue){
+        return (value == null || "".equals(value))?"": value.toString();
     }
 }
